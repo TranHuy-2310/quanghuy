@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:replace="layout :: header"></th:block>
+<div class="container">
+  <h1>Add Book</h1>
+  <form th:action="@{/add}" th:object="${book}" method="post">
+
+<!--    <div class="col-6 mb-3">-->
+<!--      <label class="form-label" for="title"> ID</label>-->
+<!--      <input class="form-control" type="text" th:field="*{id}" id="id">-->
+<!--    </div>-->
+    <div class="col-6 mb-3">
+      <label class="form-label" for="title">TITLE</label>
+      <input class="form-control" type="text" th:field="*{title}" id="title">
+        <span  class="text-danger" th:if="${#fields.hasErrors('title')}" th:error="*{title}" ></span>
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" for="title">AUTHOR</label>
+      <input class="form-control" type="text" th:field="*{author}" id="author">
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" for="title">Price</label>
+      <input class="form-control" type="text" th:field="*{price}" id="price">
+        <span  class="text-danger" th:if="${#fields.hasErrors('price')}" th:error="*{price}" ></span>
+    </div>
+<!--    <div class="col-6 mb-3">-->
+<!--      <label class="form-label" for="title">Category</label>-->
+<!--      <input class="form-control" type="text" th:field="*{category}" id="category">-->
+<!--    </div>-->
+    <div class="col-6 mb-3">
+      <label class="form-label" for="category">Category: </label>
+      <select class="form-control" id="category" name="category.id">
+        <option value=""> -- Select Category--        </option>
+        <option th:each="category : ${categories}" th:value="${category.id}"
+                th:text="${category.name}"></option>
+      </select>
+        <span  class="text-danger" th:if="${#fields.hasErrors('category')}" th:error="*{category}" ></span>
+    </div>
+
+    <input type="submit" class="btn btn-primary" value="Save">
+
+  </form>
+  <br>
+  <a th:href="@{/books}">back to list</a>
+
+</div>
+<th:block th:replace="layout :: footer"></th:block>
+</body>
+</html>
